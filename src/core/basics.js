@@ -1,4 +1,5 @@
 import curryN from 'lodash/fp/curryN'
+import curry from 'lodash/fp/curry'
 import set from 'lodash/fp/set'
 
 
@@ -45,3 +46,6 @@ export const union = (type, ...types) => defineHiddenProperties(types, { constru
 function Alias() {}
 
 export const alias = (type, shape) => defineHiddenProperties(shape, { constructor: Alias, type })
+
+
+export const infixr = curry((p0, fn, p1) => fn(p0, p1))

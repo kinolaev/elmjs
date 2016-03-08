@@ -1,11 +1,17 @@
+import curry from 'lodash/fp/curry'
+
 import { send } from '../core/signal'
+import { perform } from '../core/task'
 
 
-export const onClick = (address, action) => ({
-  name: 'onclick',
+const handle = curry((name, address, action) => ({
+  name: 'on' + name,
   value: event => {
     event.preventDefault()
     event.stopPropagation()
-    send(address, action)
+    perform(send(address, action))
   }
-})
+}))
+
+
+export const onClick = handle('click')
